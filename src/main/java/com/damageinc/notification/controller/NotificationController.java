@@ -3,6 +3,7 @@ package com.damageinc.notification.controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.damageinc.notification.dto.NotificationRequest;
+import com.damageinc.notification.dto.NotificationResponse;
 import com.damageinc.notification.factory.NotificationFactory;
 import com.damageinc.notification.service.NotificationService;
 
@@ -19,7 +20,7 @@ public class NotificationController {
     }
 
     @PostMapping
-    public String sendNotification(
+    public NotificationResponse sendNotification(
         @Valid @RequestBody NotificationRequest request) {
 
         NotificationService service =
@@ -27,6 +28,9 @@ public class NotificationController {
 
         service.send(request.getMessage());
 
-        return "Notification sent successfully";
+        return new NotificationResponse(
+        "success",
+        "Notification sent successfully"
+        );
     }
 }

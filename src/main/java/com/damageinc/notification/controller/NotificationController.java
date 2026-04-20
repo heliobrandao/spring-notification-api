@@ -6,6 +6,8 @@ import com.damageinc.notification.dto.NotificationRequest;
 import com.damageinc.notification.factory.NotificationFactory;
 import com.damageinc.notification.service.NotificationService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/notify")
 public class NotificationController {
@@ -17,7 +19,8 @@ public class NotificationController {
     }
 
     @PostMapping
-    public String sendNotification(@RequestBody NotificationRequest request) {
+    public String sendNotification(
+        @Valid @RequestBody NotificationRequest request) {
 
         NotificationService service =
                 factory.getNotificationService(request.getType());

@@ -13,6 +13,7 @@ import com.damageinc.notification.service.NotificationService;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @WebMvcTest(NotificationController.class)
 class NotificationControllerTest {
@@ -41,6 +42,7 @@ class NotificationControllerTest {
         mockMvc.perform(post("/notify")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status")
                         .value("success"));
